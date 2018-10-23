@@ -1,0 +1,18 @@
+$background: #1b1c1d;
+
+.segment.placeholder.ui {
+    background-color: $background;
+    label {
+        color:#fff;
+    }
+    .forgot {
+        color:#fff;
+    }
+    .ui.divider {
+        color:#fff;
+        font-size: 1.5rem;
+    }
+    .ui.divider:before {
+        background-color: #fff0;
+    }
+}

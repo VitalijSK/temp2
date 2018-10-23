@@ -1,0 +1,98 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" novalidate [ngClass]="'ui form'" >
+    <h2 class="title">{{ title }}</h2>
+    <div [ngClass]="'field'">
+        <label>Name: </label>
+        <div [ngClass]="'ui icon input'" [class.loading]="profileForm.controls['name'].pending">
+            <input type="text" formControlName="name" (keypress)="checkSymbol($event)" >
+            <i [ngClass]="'icon'" [class.check]="checkValid('name')" [class.close]="checkInvalid('name')"></i>
+        </div>
+        <div *ngIf="checkInvalid('name')"  class="ui negative message" >
+            <div *ngIf="profileForm.controls['name'].errors.required" class="header">
+              Name is required.
+            </div>
+            <div *ngIf="profileForm.controls['name'].errors.minlength" class="header">
+              Name must be at least 4 characters long.
+            </div>
+            <div *ngIf="profileForm.controls['name'].errors.forbiddenName" 
+                [innerHTML]="profileForm.controls['name'].errors.forbiddenName.value" class="header">
+            </div>
+            <div *ngIf="profileForm.controls['name'].errors.forbiddenCurrectName" 
+                [innerHTML]="profileForm.controls['name'].errors.forbiddenCurrectName.value" class="header">
+            </div>
+        </div>
+    </div>
+    <div [ngClass]="'field'">
+        <label>Password: </label>
+        <div [ngClass]="'ui icon input'" >
+            <input type="password" formControlName="password" (keypress)="cantSpace($event)" >
+            <i [ngClass]="'icon'" [class.check]="checkValid('password')" [class.close]="checkInvalid('password')"></i>
+        </div>
+        <div *ngIf="checkInvalid('password')"  class="ui negative message" >
+            <div *ngIf="profileForm.controls['password'].errors.required" class="header">
+              Password is required.
+            </div>
+            <div *ngIf="profileForm.controls['password'].errors.minlength" class="header">
+              Password must be at least 4 characters long.
+            </div>
+        </div>
+    </div>
+    <div [ngClass]="'field'">
+        <label>Age: </label>
+        <div [ngClass]="'ui icon input'">
+            <input type="text" formControlName="age">
+            <i [ngClass]="'icon'" [class.check]="checkValid('age')" [class.close]="checkInvalid('age')"></i>
+        </div>
+        <div *ngIf="checkInvalid('age')"  class="ui negative message" >
+            <div *ngIf="profileForm.controls['age'].errors.required" class="header">
+                Age is required.
+            </div>
+            <div *ngIf="profileForm.controls['age'].errors.forbiddenAge"  class="header"
+                [innerHTML]="profileForm.controls['age'].errors.forbiddenAge.value" >
+            </div>
+        </div>
+    </div>
+    <div [ngClass]="'field'">
+        <label>Birthday: </label>
+        <div [ngClass]="'ui icon input'">
+            <input type="text" formControlName="birthday" placeholder="YYYY/MM/DD" >
+            <i [ngClass]="'icon'" [class.check]="checkValid('birthday')" [class.close]="checkInvalid('birthday')"></i>
+        </div>
+        <div *ngIf="checkInvalid('birthday')" class="ui negative message" >
+            <div *ngIf="profileForm.controls['birthday'].errors.forbiddenDate"  class="header"
+                [innerHTML]="profileForm.controls['birthday'].errors.forbiddenDate.value" >
+            </div>
+        </div>
+    </div>
+    <div [ngClass]="'field'">
+        <label>Date of login: </label>
+        <div [ngClass]="'ui icon input'">
+            <input type="text" formControlName="dateOfLogin" placeholder="DD MMMM YYYY" >
+            <i [ngClass]="'icon'" [class.check]="checkValid('dateOfLogin')" [class.close]="checkInvalid('dateOfLogin')"></i>
+        </div>
+        <div *ngIf="checkInvalid('dateOfLogin')" class="ui negative message" >
+            <div *ngIf="profileForm.controls['dateOfLogin'].errors.forbiddenDate" class="header"
+                [innerHTML]="profileForm.controls['dateOfLogin'].errors.forbiddenDate.value" >
+            </div>
+        </div>
+    </div>
+    <div [ngClass]="'field'">
+        <label>Date of notification: </label>
+        <div [ngClass]="'ui icon input'" >
+            <input type="text" formControlName="dateOfNotification" placeholder="DD-MMM-YY" >
+            <i [ngClass]="'icon'" [class.check]="checkValid('dateOfNotification')" [class.close]="checkInvalid('dateOfNotification')"></i>
+        </div>
+        <div *ngIf="checkInvalid('dateOfNotification')" class="ui negative message" >
+            <div *ngIf="profileForm.controls['dateOfNotification'].errors.forbiddenDate" class="header"
+                [innerHTML]="profileForm.controls['dateOfNotification'].errors.forbiddenDate.value" >
+            </div>
+        </div>
+    </div>
+    <button type="submit" [disabled]="!profileForm.valid" 
+        [ngClass]="'ui inverted violet button'" >Submit</button>
+    <div *ngIf="user.information" class="ui success message">
+        <div class="header">
+            Your user registration was successful.
+        </div>
+        <p *ngFor="let prop of user | keys" >{{prop}} : {{user[prop]}}</p>
+    </div>
+  </form>

@@ -1,0 +1,27 @@
+$background: #1b1c1d;
+$width: 100vw;
+$padding: 20px;
+$maxWidth: 400px;
+.form {
+    margin: 0 auto;
+    width: $width;
+    max-width: $maxWidth;
+    background-color: $background;
+    padding: $padding;
+    .title {
+        text-align: center;
+        color:#fff;
+    }
+    label {
+        color:#fff;
+    }
+    .close{
+        color: red;
+    }
+    .check {
+        color: green;
+    }
+    .message {
+        display: block;
+    }
+}

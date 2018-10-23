@@ -1,0 +1,59 @@
+<div class="ui placeholder segment">
+    <div class="ui two column very relaxed stackable grid">
+      <div class="column">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" novalidate [ngClass]="'ui form'" [class.loading]="loading">
+          <div class="field">
+            <label>Username</label>
+                <div [ngClass]="'ui icon left input'" [class.loading]="profileForm.controls['name'].pending">
+                    <input type="text"  placeholder="Username" formControlName="name"  >
+                    <i class="user icon"></i>
+                </div>
+                <div *ngIf="checkInvalid('name')"  class="ui negative message" >
+                    <div *ngIf="profileForm.controls['name'].errors.required" class="header">
+                    Name is required.
+                    </div>
+                    <div *ngIf="profileForm.controls['name'].errors.minlength" class="header">
+                    Name must be at least 4 characters long.
+                    </div>
+                    <div *ngIf="profileForm.controls['name'].errors.forbiddenName" 
+                        [innerHTML]="profileForm.controls['name'].errors.forbiddenName.value" class="header">
+                    </div>
+                </div>
+          </div>
+          <div class="field">
+            <label>Password: </label>
+            <div [ngClass]="'ui icon input'" >
+                <input type="password" formControlName="password" (keypress)="cantSpace($event)" >
+                <i class="lock icon"></i>
+            </div>
+            <div *ngIf="checkInvalid('password')"  class="ui negative message" >
+                <div *ngIf="profileForm.controls['password'].errors.required" class="header">
+                  Password is required.
+                </div>
+                <div *ngIf="profileForm.controls['password'].errors.minlength" class="header">
+                  Password must be at least 4 characters long.
+                </div>
+            </div>
+          </div>
+          <div class="field">
+              <a class="forgot" routerLink="/forgot">Forgot password?</a>
+            </div>
+          <button type="submit" [disabled]="!profileForm.valid"  class="ui inverted violet button" >Login</button>
+          <div *ngIf="incorrect" class="ui negative message">
+            <div class="header">
+                {{ incorrect }}.
+            </div>
+        </div>
+        </form>
+      </div>
+      <div class="middle aligned column">
+        <div class="ui big inverted violet button" routerLink="/singup">
+          <i class="signup icon"></i>
+           Sign Up
+        </div>
+      </div>
+    </div>
+    <div class="ui vertical divider">
+      Or
+    </div>
+  </div>
