@@ -10,7 +10,7 @@ class UsersModel {
     getUsers() {
         return this.users.map(user => user);
     }
-    getUserById(id: number) {
+    getUserById(id: string) {
         const user = this.users.find(findById(id));
         if (user) {
             return user;
@@ -56,14 +56,14 @@ class UsersModel {
         }
         return false;
     }
-    deleteUserById(id: number) {
+    deleteUserById(id: string) {
         if (this.isExistId(id)) {
             this.users = this.users.filter(filterById(id));
             return true;
         }
         return false;
     }
-    isExistId(id: number) {
+    isExistId(id: string) {
         const userIndex = this.users.findIndex(findById(id));
         return userIndex >= 0;
     }
@@ -71,10 +71,10 @@ class UsersModel {
         return uuidv4();
     }
 }
-const findById = (id : number) => {
+const findById = (id : string) => {
     return user => user.id === id   
 };
-const filterById = (id : number) => {
+const filterById = (id : string) => {
     return user => user.id !== id   
 };
 const findByName = (name) => {

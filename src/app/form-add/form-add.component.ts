@@ -1,4 +1,4 @@
-import { Component,  OnInit } from '@angular/core';
+import { Input, Component,  OnInit, EventEmitter } from '@angular/core';
 import {  FormBuilder,  FormGroup, Validators } from '@angular/forms';
 import settings from './settings';
 import { forbiddenAgeValidator } from '../validators/age';
@@ -13,32 +13,24 @@ import IUser from '../interfaces/user';
   styleUrls: ['./form-add.component.scss'],
 })
 export class FormAddComponent implements OnInit {
+    
+    @Input() user : IUser
 
-    title : string;
     profileForm !: FormGroup;
-    user !: IUser;
+    submit = new EventEmitter<IUser>();
 
     constructor(private fb: FormBuilder, private userService: UserService) {}
 
     ngOnInit() {
-        this.title = 'Sing Up';
         this.profileForm = this.fb.group({
-            name : ['', [Validators.required, Validators.minLength(settings.name.min), forbiddenNameValidator()], forbiddenCurrectNameValidator(this.userService)],
-            password : ['', [Validators.required, Validators.minLength(settings.password.min)]],
-            age : ['', [Validators.required, forbiddenAgeValidator(settings.age.from, settings.age.till)]],
-            birthday : ['', [forbiddenDateValidator(settings.birthday.format)]],
-            dateOfLogin : ['', [forbiddenDateValidator(settings.dateOfLogin.format)]],
-            dateOfNotification : ['', [forbiddenDateValidator(settings.dateOfNotification.format)]]
+            name : [this.user.name, [Validators.required, Validators.minLength(settings.name.min), forbiddenNameValidator()], forbiddenCurrectNameValidator(this.userService, this.user.name)],
+            password : [this.user.password, [Validators.required, Validators.minLength(settings.password.min)]],
+            age : [this.user.age, [Validators.required, forbiddenAgeValidator(settings.age.from, settings.age.till)]],
+            birthday : [this.user.dateOfBirth, [forbiddenDateValidator(settings.birthday.format)]],
+            dateOfLogin : [this.user.dateOfFirstLogin, [forbiddenDateValidator(settings.dateOfLogin.format)]],
+            dateOfNotification : [this.user.dateOfNextNotification, [forbiddenDateValidator(settings.dateOfNotification.format)]],
+            information : [this.user.information]
         });
-        this.user = {
-            name: '',
-            age : 0
-        }
-        Object.defineProperty(this.user, 'information', {
-            enumerable: false,
-            value : false,
-            writable: true 
-        })
     }
     checkSymbol(event) {
         const { key } = event;
@@ -62,19 +54,12 @@ export class FormAddComponent implements OnInit {
 
     checkValid(input : string) {
         return !this.checkInvalid(input) && 
-            this.profileForm.controls[input].value !== '';
+            this.profileForm.controls[input].value !== '' && 
+            this.profileForm.controls[input].value !== null;
     }
 
     onSubmit() {
-        const form = this.profileForm.controls;
-        for (const key in form) {
-            const value = form[key].value.trim();
-            if (value !== '') {
-                this.user[key] = value;
-            }
-        }
-        this.profileForm.reset();
-        this.user.information = true;
+        this.submit.emit();     
     }
 
 }

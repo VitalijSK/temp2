@@ -1,30 +1,31 @@
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" novalidate [ngClass]="'ui form '" [class.loading]="loading" >
     <h2 class="title">{{ title }}</h2>
     <div [ngClass]="'field'">
-        <label>Name: </label>
+        <label> {{ 'NAME' | translate }}: </label>
         <div [ngClass]="'ui icon input'" [class.loading]="profileForm.controls['name'].pending">
             <input type="text" formControlName="name" >
             <i [ngClass]="'icon'" [class.check]="checkValid('name')" [class.close]="checkInvalid('name')"></i>
         </div>
         <div *ngIf="checkInvalid('name')"  class="ui negative message" >
             <div *ngIf="profileForm.controls['name'].errors.required" class="header">
-              Name is required.
+                    {{ 'REQUIRED' | translate: { value : 'NAME' | translate} }}
             </div>
             <div *ngIf="profileForm.controls['name'].errors.forbiddenName" 
+                translate
                 [innerHTML]="profileForm.controls['name'].errors.forbiddenName.value" class="header">
             </div>
         </div>
     </div>
     <button type="submit" [disabled]="!profileForm.valid" 
-        [ngClass]="'ui inverted violet button'" >Submit</button>
+        [ngClass]="'ui inverted violet button'" >{{ 'SUBMIT' | translate }}</button>
     <div *ngIf="incorrectName" class="ui negative message">
-        <div class="header">
+        <div translate class="header">
             {{ incorrectName }}.
         </div>
     </div>
     <div *ngIf="password" class="ui success message">
         <div class="header">
-            Your password - {{ password }}.
+            {{ 'YOUPASSWORD' | translate }} - {{ password }}.
         </div>
     </div>
   </form>

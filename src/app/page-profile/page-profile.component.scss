@@ -1,0 +1,40 @@
+$background: #1b1c1d;
+$width: 100vw;
+$padding: 20px;
+$maxWidth: 500px;
+.black {
+    background-color: $background;
+    width: $width;
+    height: 100%;
+    h2 {
+        text-align: center;
+        color:#fff;
+        padding-top: 20px;
+    }
+    .container {
+        width: 100%;
+        max-width: $maxWidth;
+        padding: $padding;
+        margin:0 auto;
+        color:#fff;
+        font-size: 1.2rem;
+        .field{
+            display:grid;
+            grid-template-columns: 1fr 1fr;
+            grid-column-gap: 20px;
+            div {
+                p {
+                    text-align: left;
+                }
+            }
+            div:first-child {
+                p {
+                    text-align: right;
+                }
+            }
+        }
+        .value {
+            text-align: right;
+        }
+    }
+}

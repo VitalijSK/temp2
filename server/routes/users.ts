@@ -1,6 +1,7 @@
 import userMiddleware from '../middelwares/apiWare';
 import userMiddlewareAssec from '../middelwares/userWare';
 import usersControllers from '../controllers/UserRoutController'
+import languageControllers from '../controllers/LanguageControllers';
 import * as bodyParser from 'body-parser';
 
 const Router = require('router');
@@ -13,6 +14,7 @@ const router = Router();
 router.use(cors());
 router.use(jsonParser); 
 
+router.get('/api/language/:lang', languageControllers.getLanguage);
 router.get('/api/users/:id', usersControllers.getUserById);
 router.get('/api/users', usersControllers.getUsers);
 
@@ -29,6 +31,7 @@ router.delete('/api/users/:id', usersControllers.deleteUserById);
 
 router.use(userMiddlewareAssec.extendReqUser, userMiddlewareAssec.errorHandler);
 router.get('/api/profile', usersControllers.getUserAuth);
+router.get('/api/users/checkAuthUser', usersControllers.checkAuthUser);
 
 export default router;
 

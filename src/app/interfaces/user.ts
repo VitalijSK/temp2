@@ -1,9 +1,10 @@
 export default interface IUser {
+    id ?: string ;
     name : string;
-    age: number;
-    information ?: boolean;
+    password: string;
+    age: number | string;
+    information ?: string;
     dateOfNextNotification ?: string;
     dateOfFirstLogin ?: string;
     dateOfBirth ?: string;
-    prop ?: Array<string>;
   }

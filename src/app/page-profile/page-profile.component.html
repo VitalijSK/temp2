@@ -1,0 +1,31 @@
+<div class="black" [class.loading]="user">
+  <h2>{{ 'MYPROFILE' | translate }}</h2>
+  <div class="container">
+    <div class="user" *ngIf="user">
+      <div class="field" >
+        <div><p> {{ 'NAME' | translate }} : </p></div><div><p class="value">{{ user.name }} </p></div>
+      </div>
+      <div class="field" >
+          <div><p> {{ 'PASSWORD' | translate }} : </p></div><div><p class="value">{{ user.password }} </p></div>
+      </div>
+      <div class="field" >
+        <div><p> {{ 'AGE' | translate }} : </p></div><div><p class="value">{{ user.age }} </p></div>
+      </div>
+      <div class="field" >
+        <div><p> {{ 'BIRTHDAY' | translate }} : </p></div><div><p class="value">{{ user.dateOfBirth  }} </p></div>
+      </div>
+      <div class="field" >
+          <div><p> {{ 'DATEOFLOGIN' | translate }} : </p></div><div><p class="value">{{ user.dateOfFirstLogin }} </p></div>
+      </div>
+      <div class="field" >
+          <div><p> {{ 'DATEOFNOTIFICATION' | translate }} : </p></div><div><p class="value">{{ user.dateOfNextNotification }} </p></div>
+      </div>
+      <div class="field" >
+          <div><p> {{ 'INFORMATION' | translate }} : </p></div><div><p class="value">{{ user.information }} </p></div>
+      </div>
+    </div>
+    <div *ngIf="error" class="ui negative message">
+      <div class="header" translate >{{ error }}</div>
+    </div>
+  </div>
+</div>

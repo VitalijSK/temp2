@@ -28,10 +28,11 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/semantic-ui-css/semantic.min.css"
+              "node_modules/semantic-ui-css/semantic.min.css",
+              "node_modules/sweetalert2/src/sweetalert2.scss"
             ],
             "scripts": [
-
+                
             ]
           },
           "configurations": {

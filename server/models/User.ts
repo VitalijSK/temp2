@@ -1,10 +1,10 @@
 export interface IUser {
-    id?: number;
-    name: string;
-    password?: string;
-    age ?: number;
-    dateOfBirth ?: string;
-    information?: string;
-    dateOfFirstLogin ?: string;
+    id ?: string ;
+    name : string;
+    password: string;
+    age: number | string;
+    information ?: string;
     dateOfNextNotification ?: string;
+    dateOfFirstLogin ?: string;
+    dateOfBirth ?: string;
 }

@@ -15,14 +15,24 @@ class UsersControllers {
         }
         return res.end('Empty');
     };
+    checkAuthUser (req: Request & IUserRequest, res: Response) {
+        if (req.decoded) {
+            const { id } = req.decoded;
+            const user = users.getUserById(id);
+            return res.end(JSON.stringify(!(user === false)));
+        }
+        return res.end('can\'t access');
+    }
     getUserAuth(req: Request & IUserRequest, res: Response) {
         if (req.decoded) {
-            return res.end(JSON.stringify(req.decoded));
+            const { id } = req.decoded;
+            const user = users.getUserById(id);
+            return res.end(JSON.stringify(user));
         }
         return res.end('can\'t access');
     }
     getUserById(req: Request, res: Response) {
-        const user = users.getUserById(+req.params.id);
+        const user = users.getUserById(req.params.id);
         if (user) {
             return res.end(JSON.stringify(user));
         }
@@ -37,25 +47,28 @@ class UsersControllers {
         return res.end('Something gone wrong');
     };
     checkName(req: Request & IUserRequest, res: Response) {
-        const name : string = req.checkName;
-        const checkUserName = users.checkUserName(name);
-        const data = { checkUserName };
-        return res.end(JSON.stringify(checkUserName));
+        setTimeout( () => {
+            const name : string = req.checkName;
+            const checkUserName = users.checkUserName(name);
+            return res.end(JSON.stringify(checkUserName));
+        }, 300);
     }
     checkUser(req: Request & IUserRequest, res: Response) {
-        
-        const {name, password} = req.user;
-        
-        const checkUser = users.checkUser(name, password);
-        if (checkUser) {
-            const timeLife = 1440; // 24h
-            const token = jwt.sign(checkUser, secret, {
-                expiresIn: timeLife
-              });
-            return res.end(JSON.stringify({token}));
-        } else {
-           return res.end('Name or password incorrect');
-        }   
+        setTimeout(()=>{
+            const {name, password} = req.user;
+            
+            const checkUser = users.checkUser(name, password);
+            if (checkUser) {
+                const timeLife = 24 * 60 * 60 ; // 24h
+                const token = jwt.sign(checkUser, secret, {
+                    expiresIn: timeLife
+                });
+                return res.end(JSON.stringify({token}));
+                
+            } else {
+            return res.end('Name or password incorrect');
+            }  
+        }, 3000);  
     }
     getPassword(req: Request & IUserRequest, res: Response) {
         const name : string = req.checkName;
@@ -69,7 +82,6 @@ class UsersControllers {
         
     }
     editUserById(req: Request & IUserRequest, res: Response) {
-        req.user.id = +req.params.id;
         const user = users.updateUserById(req.user);
         if (user) {
             return res.end(JSON.stringify(user));
@@ -78,7 +90,7 @@ class UsersControllers {
 
     };
     deleteUserById(req: Request, res: Response) {
-        const user = users.deleteUserById(+req.params.id);
+        const user = users.deleteUserById(req.params.id);
         if (user) {
             return res.end(JSON.stringify('User was deleted'));
         }

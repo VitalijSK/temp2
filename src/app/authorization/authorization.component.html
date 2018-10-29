@@ -3,44 +3,41 @@
       <div class="column">
         <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" novalidate [ngClass]="'ui form'" [class.loading]="loading">
           <div class="field">
-            <label>Username</label>
+            <label> {{ 'NAME' | translate }}</label>
                 <div [ngClass]="'ui icon left input'" [class.loading]="profileForm.controls['name'].pending">
-                    <input type="text"  placeholder="Username" formControlName="name"  >
+                    <input type="text"  placeholder="{{ 'NAME' | translate }}" formControlName="name"  >
                     <i class="user icon"></i>
                 </div>
                 <div *ngIf="checkInvalid('name')"  class="ui negative message" >
                     <div *ngIf="profileForm.controls['name'].errors.required" class="header">
-                    Name is required.
+                         {{ 'REQUIRED' | translate: { value : 'NAME' | translate} }}
                     </div>
                     <div *ngIf="profileForm.controls['name'].errors.minlength" class="header">
-                    Name must be at least 4 characters long.
-                    </div>
-                    <div *ngIf="profileForm.controls['name'].errors.forbiddenName" 
-                        [innerHTML]="profileForm.controls['name'].errors.forbiddenName.value" class="header">
+                         {{ 'MINLENGTH' | translate:{ name :'NAME' | translate, min : 4 } }}
                     </div>
                 </div>
           </div>
           <div class="field">
-            <label>Password: </label>
+            <label>{{ 'PASSWORD' | translate }}: </label>
             <div [ngClass]="'ui icon input'" >
                 <input type="password" formControlName="password" (keypress)="cantSpace($event)" >
                 <i class="lock icon"></i>
             </div>
             <div *ngIf="checkInvalid('password')"  class="ui negative message" >
                 <div *ngIf="profileForm.controls['password'].errors.required" class="header">
-                  Password is required.
+                  {{ 'REQUIRED' | translate:'PASSWORD' | translate }}
                 </div>
                 <div *ngIf="profileForm.controls['password'].errors.minlength" class="header">
-                  Password must be at least 4 characters long.
+                    {{ 'MINLENGTH' | translate:{ name :'PASSWORD' | translate, min : 4 } }}
                 </div>
             </div>
           </div>
           <div class="field">
-              <a class="forgot" routerLink="/forgot">Forgot password?</a>
+              <a class="forgot" routerLink="/forgot">{{ 'FORGOTPASSWORD' | translate }}?</a>
             </div>
-          <button type="submit" [disabled]="!profileForm.valid"  class="ui inverted violet button" >Login</button>
+          <button type="submit" [disabled]="!profileForm.valid"  class="ui inverted violet button" >{{ 'LOGIN' | translate }}</button>
           <div *ngIf="incorrect" class="ui negative message">
-            <div class="header">
+            <div class="header" translate >
                 {{ incorrect }}.
             </div>
         </div>
@@ -49,11 +46,11 @@
       <div class="middle aligned column">
         <div class="ui big inverted violet button" routerLink="/singup">
           <i class="signup icon"></i>
-           Sign Up
+          {{ 'SINGUP' | translate }}
         </div>
       </div>
     </div>
     <div class="ui vertical divider">
-      Or
+        {{ 'OR' | translate }}
     </div>
   </div>

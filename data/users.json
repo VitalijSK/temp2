@@ -1,6 +1,6 @@
 [
     {   
-        "id":0,
+        "id": "0",
         "name":"Katrin22",
         "password" : "password",
         "dateOfBirth" : "2018-09-22T10:48:12.096Z",
@@ -9,7 +9,7 @@
         "information" : "something"
     },
     {   
-        "id":1,
+        "id":"1",
         "name":"Mark",
         "password" : "qwerty",
         "dateOfBirth" : "2018-09-22T10:48:12.096Z",
@@ -18,7 +18,7 @@
         "information" : "something"
     },
     {   
-        "id":2,
+        "id":"2",
         "name":"Jon",
         "password" : "123456",
         "dateOfBirth" : "2018-09-22T10:48:12.096Z",

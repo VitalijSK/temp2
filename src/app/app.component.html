@@ -2,11 +2,24 @@
 <header>
     <nav class="ui secondary pointing menu">
         <a routerLink="/" class="item" routerLinkActive="active" >
-          Home
+            {{ 'HOME' | translate }}
         </a>
-        <a routerLink="/profile" class="item" routerLinkActive="active" >
-          My profile
+        <a routerLink="/profile" class="item" routerLinkActive="active" *ngIf="state.getValue()?.role !== 0" >
+            {{ 'MYPROFILE' | translate }}
         </a>
+        <a routerLink="/settings" class="item" routerLinkActive="active" *ngIf="state.getValue()?.role !== 0"  >
+            {{ 'SETTINGS' | translate }}
+        </a>
+        <div class="right menu">
+            <a (click)="logout()" class="item" *ngIf="state.getValue()?.role !== 0" >
+                {{ 'LOGOUT' | translate }}
+            </a>
+            <select class="ui dropdown menu" (change)="selectLanguage($event)"> 
+                <option  value="">{{ 'LANGUAGE' | translate }}</option>
+                <option  value="en">{{ 'ENGLISH' | translate }}</option>
+                <option  value="rus">{{ 'RUSSUAN' | translate }}</option>
+            </select>
+        </div>
     </nav>
 </header>
 <main>

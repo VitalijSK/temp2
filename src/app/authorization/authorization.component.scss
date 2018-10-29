@@ -1,6 +1,8 @@
 $background: #1b1c1d;
 
 .segment.placeholder.ui {
+    
+    height: 100%;
     background-color: $background;
     label {
         color:#fff;
@@ -11,6 +13,11 @@ $background: #1b1c1d;
     .ui.divider {
         color:#fff;
         font-size: 1.5rem;
+    }
+    .column {
+        .button {
+            max-width: 21rem;
+        }
     }
     .ui.divider:before {
         background-color: #fff0;

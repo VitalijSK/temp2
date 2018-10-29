@@ -1,21 +1,20 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { IErrorHandler } from 'src/app/interfaces/validators';
 
 export function forbiddenNameValidator(): ValidatorFn {
-    return (control: AbstractControl):  {[key: string]: {value: string}} | null => {
+    return (control: AbstractControl):  IErrorHandler | null => {
         if (control.value === null) return null;
         const name : string = control.value.trim();
-        let data: {[key: string]: {value: string}} | null;
+        let data: IErrorHandler | null;
         
         if (checkMiddleWare(name, checkRusLetter)) {
             data = { 'forbiddenName': 
-                        { value: `any Russian symbols are not allowed` } 
-                        
+                        { value: `any Russian symbols are not allowed` }                
                     }
         }
         if (checkMiddleWare(name, checkRusLetter)) {
             data = { 'forbiddenName': 
-                        { value: `any Russian symbols are not allowed` } 
-                        
+                        { value: `any Russian symbols are not allowed` }                    
                     }
         } else if (checkMiddleWare(name, checkCountName)) {
             data = { 'forbiddenName': 

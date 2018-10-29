@@ -1,11 +1,12 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { IErrorHandler } from 'src/app/interfaces/validators';
 
 export function forbiddenAgeValidator(min: number, max : number): ValidatorFn {
-    return (control: AbstractControl): {[key: string]: {value: string}} | null => {
-        if (control.value === null || control.value === '') return null;
+    return (control: AbstractControl): IErrorHandler | null => {
+        if (control.value === null) return null;
 
         const value : number = control.value;
-        let data : {[key: string]: {value: string}} | null;
+        let data : IErrorHandler | null;
 
         if (!checkInt(value)) {
             data = { 'forbiddenAge': {value: `Age must be intenger`} };
