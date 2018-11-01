@@ -7,4 +7,5 @@ export default interface IUser {
     dateOfNextNotification ?: string;
     dateOfFirstLogin ?: string;
     dateOfBirth ?: string;
+    error ?: string;
   }

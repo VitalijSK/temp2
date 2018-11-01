@@ -1,8 +1,8 @@
 <section class="container">
-<div *ngIf="data">
-<h2 class="title">{{ 'SETTINGS' | translate }}</h2>
-<app-form-add (submit)="onSubmit($event)" [user]="data" ></app-form-add>
-</div>
+    <div *ngIf="data">
+        <h2 class="title">{{ 'SETTINGS' | translate }}</h2>
+        <app-form-add (submitUser)="onSubmit($event)" [user]="data"></app-form-add>
+    </div>
 
     <div *ngIf="success" class="ui success message">
         <div class="header" translate>
@@ -13,4 +13,3 @@
         <div class="header" translate>{{ error }}</div>
     </div>
 </section>
-

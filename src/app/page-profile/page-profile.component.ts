@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../servies/user/user.service';
 import IUser from '../interfaces/user';
-import * as moment from 'moment';
-import settings from '../form-add/settings';
+import { tap } from 'rxjs/operators';
+import { CommunicationService } from '../servies/communication/communication.service';
 
 @Component({
   selector: 'app-page-profile',
@@ -10,23 +9,20 @@ import settings from '../form-add/settings';
   styleUrls: ['./page-profile.component.scss']
 })
 export class PageProfileComponent implements OnInit {
-  user : IUser;
-  error : string;
+  user: IUser;
+  error: string;
 
-  constructor(private userService: UserService) { }
+  constructor(private communicationService: CommunicationService) { }
 
   ngOnInit() {
-    this.userService.getMyProfile().subscribe(
-      user => {
-        user.dateOfBirth = moment(user.dateOfBirth).format(settings.birthday.format);
-        user.dateOfFirstLogin= moment(user.dateOfFirstLogin).format(settings.dateOfLogin.format);
-        user.dateOfNextNotification = moment(user.dateOfNextNotification).format(settings.dateOfNotification.format);
-        this.user = user;
-      },
-      err => {
-        this.error = err.error.text;
-      }
-    );
+    this.communicationService.user$.pipe(
+      tap(data => {
+        if (data.error) {
+          this.error = data.error;
+        } else {
+          this.user = data;
+        }
+      })
+    ).subscribe();
   }
-
 }

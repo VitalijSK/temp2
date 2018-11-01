@@ -3,36 +3,35 @@ import { IErrorHandler } from 'src/app/interfaces/validators';
 
 export function forbiddenNameValidator(): ValidatorFn {
     return (control: AbstractControl):  IErrorHandler | null => {
-        if (control.value === null) return null;
+        if (control.value === null) { 
+            return null; 
+        }
         const name : string = control.value.trim();
-        let data: IErrorHandler | null;
         
         if (checkMiddleWare(name, checkRusLetter)) {
-            data = { 'forbiddenName': 
+            return { 'forbiddenName': 
                         { value: `any Russian symbols are not allowed` }                
-                    }
+                    };
         }
         if (checkMiddleWare(name, checkRusLetter)) {
-            data = { 'forbiddenName': 
+            return { 'forbiddenName': 
                         { value: `any Russian symbols are not allowed` }                    
                     }
         } else if (checkMiddleWare(name, checkCountName)) {
-            data = { 'forbiddenName': 
+            return { 'forbiddenName': 
                         { value: `one or two words, no more and one space between words` } 
                     }
         } else if (checkMiddleWare(name, checkSymbolName)) {
-            data = { 'forbiddenName': 
+            return { 'forbiddenName': 
                         { value: `Special symbols are not allowed` } 
                     }
         } else if (checkMiddleWare(name, checkUpperFirstLetter)) {
-            data = { 'forbiddenName': 
+            return { 'forbiddenName': 
                         { value: `the first letter of the word should be UpperCase rest LowerCase` } 
                     }
         } else {
-            data = null;
+            return null;
         }
-
-        return data;
     };
   }
 
@@ -42,10 +41,10 @@ const checkMiddleWare = (name: string, callback : Function) => {
 }
 
 //callback functions
-const checkRusLetter = (arrName : Array<String>) => arrName.some(isRusLetter);
-const checkCountName = (arrName : Array<String>) => !arrName.every(isTwoWord());
-const checkUpperFirstLetter = (arrName : Array<String>) => !arrName.every(isCheckLetter());
-const checkSymbolName = (arrName : Array<String>) => !arrName.every(isLetter);
+const checkRusLetter = (arrName : string[]) => arrName.some(isRusLetter);
+const checkCountName = (arrName : string[]) => !arrName.every(isTwoWord());
+const checkUpperFirstLetter = (arrName : string[]) => !arrName.every(isCheckLetter());
+const checkSymbolName = (arrName : string[]) => !arrName.every(isLetter);
 
 //secondary functions
 const  isCheckLetter = () => {
@@ -64,9 +63,9 @@ const  isCheckLetter = () => {
         }  
     };
 };
-const  isRusLetter = (c) => (c >= 'А' && c <= 'Я') || (c >= 'а' && c <= 'я');
-const  isLetter = (letter) =>  (letter !== ' ') ? letter.toUpperCase() !== letter.toLowerCase() : true;
-const  isFirstUpparCase = (letter) =>  letter === letter.toUpperCase();
+const isRusLetter = (c : string) => (c >= 'А' && c <= 'Я') || (c >= 'а' && c <= 'я');
+const isLetter = (letter: string) =>  (letter !== ' ') ? letter.toUpperCase() !== letter.toLowerCase() : true;
+const  isFirstUpparCase = (letter : string) =>  letter === letter.toUpperCase();
 const  isTwoWord = () => {
     let countSpace = 0;
     return (letter) => {

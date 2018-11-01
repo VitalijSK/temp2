@@ -1,6 +1,6 @@
 import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
 import { UserService } from '../../servies/user/user.service';
-import { timer, Observable } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { map, switchMap} from 'rxjs/operators';
 import { IErrorHandler } from 'src/app/interfaces/validators';
 
@@ -8,10 +8,7 @@ export function forbiddenCurrectNameValidator(userService: UserService, currectN
     return (control: AbstractControl):  Observable<IErrorHandler | null> => {
         const name: string = control.value;
         if (currectName === name) {
-            return Observable.create( obs =>  {
-                obs.next(null);
-                obs.complete();
-            });
+            return of(null);
         }
         return findCurrectName(name, userService);
     };

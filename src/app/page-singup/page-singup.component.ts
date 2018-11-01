@@ -26,14 +26,7 @@ export class PageSingupComponent implements OnInit {
     
   }
 
-  onSubmit($event) {
-    const form = [...$event.target];
-    form.forEach(element => {
-      const value = element.value.trim();
-      const key = element.getAttribute('ng-reflect-name');
-      this.data[key] = value;
-    }); 
-    $event.target.reset();
-    this.user = this.data;
+  onSubmit(user) {
+    this.user = user;
   }
 }

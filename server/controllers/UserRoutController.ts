@@ -48,8 +48,10 @@ class UsersControllers {
     };
     checkName(req: Request & IUserRequest, res: Response) {
         setTimeout( () => {
+            
             const name : string = req.checkName;
             const checkUserName = users.checkUserName(name);
+            console.log(checkUserName)
             return res.end(JSON.stringify(checkUserName));
         }, 300);
     }

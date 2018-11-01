@@ -5,7 +5,9 @@ import Swal from 'sweetalert2';
 import * as moment from 'moment';
 import settings from '../form-add/settings';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, combineLatest } from 'rxjs';
+import { Observable, combineLatest, of } from 'rxjs';
+import { catchError, tap, switchMap, take } from 'rxjs/operators';
+import { CommunicationService } from '../servies/communication/communication.service';
 
 @Component({
   selector: 'app-page-settings',
@@ -14,63 +16,63 @@ import { Observable, combineLatest } from 'rxjs';
 })
 export class PageSettingsComponent implements OnInit {
 
-  data : IUser;
-  error : string;
-  success : boolean;
-  id : string;
+  data: IUser;
+  error: string;
+  success: boolean;
+  id: string;
 
-  constructor(private userService: UserService, 
-              private translate: TranslateService) { }
+  constructor(private userService: UserService,
+              private translate: TranslateService,
+              private communicationService: CommunicationService) { }
 
   ngOnInit() {
-    this.userService.getMyProfile().subscribe(user => {
-      user.dateOfBirth = moment(user.dateOfBirth).format(settings.birthday.format);
-      user.dateOfFirstLogin= moment(user.dateOfFirstLogin).format(settings.dateOfLogin.format);
-      user.dateOfNextNotification = moment(user.dateOfNextNotification).format(settings.dateOfNotification.format);
-      this.data = user;
-      this.id = user.id;
-    }, err => {
-      this.error = err.error.text;
-    });
+    this.userService.getMyProfile().pipe(
+      tap(user => {
+        user.dateOfBirth = moment(user.dateOfBirth).format(settings.birthday.format);
+        user.dateOfFirstLogin = moment(user.dateOfFirstLogin).format(settings.dateOfLogin.format);
+        user.dateOfNextNotification = moment(user.dateOfNextNotification).format(settings.dateOfNotification.format);
+        this.data = user;
+        this.id = user.id;
+      }),
+      catchError(err => {
+        this.error = err.error.text;
+        return of();
+      })
+    ).subscribe();
   }
 
-  onSubmit($event) {
-    const user : IUser = {
-      id : this.id,
-      age : 0,
-      name : '',
-      password: ''
-    };
-    const form = [...$event.target];
-    form.forEach(element => {
-      const value = element.value.trim();
-      const key = element.getAttribute('ng-reflect-name');
-      user[key] = value;
-    }); 
-
+  onSubmit(user) {
+    user.id = this.id;
     this.timeTransform(user);
-
-    this.updateUser(user);  
+    this.updateUser(user);
   }
   timeTransform(user) {
     user.dateOfBirth = moment(user.dateOfBirth).toISOString();
-    user.dateOfFirstLogin= moment(user.dateOfFirstLogin).toISOString();
+    user.dateOfFirstLogin = moment(user.dateOfFirstLogin).toISOString();
     user.dateOfNextNotification = moment(user.dateOfNextNotification).toISOString();
   }
-  updateUser(user : IUser) {
-    this.userService.updateUser(user).subscribe(data => {
-      this.translate.get('Your information was updated!').subscribe((message: string) => {
-        Swal(message);
-      });
-        
-    }, err => {
-      const header$ : Observable<string> = this.translate.get('Oops...');
-      const text$ : Observable<string> = this.translate.get(err.error.text);
-      const combined = combineLatest(header$, text$);
-      combined.subscribe(
-        ([header, text]) => {
-          Swal(header , text, 'error');
-        });
-    })
+  updateUser(user: IUser) {
+    this.userService.updateUser(user).pipe(
+      take(1),
+      tap(_ => {
+        this.communicationService.getCorrectInfo();
+        localStorage.removeItem('update')
+        localStorage.setItem('update', null);
+      }),
+      switchMap(_ => this.translate.get('Your information was updated!')),
+      tap((message: string) => {
+        Swal(message)
+      }),
+      catchError(err => {
+        const header$: Observable<string> = this.translate.get('Oops...');
+        const text$: Observable<string> = this.translate.get(err.error.text);
+        const combined = combineLatest(header$, text$);
+        combined.subscribe(
+          ([header, text]) => {
+            Swal(header, text, 'error');
+          });
+        return of();
+      })
+    ).subscribe();
   }
 }
