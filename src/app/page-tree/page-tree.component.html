@@ -1,6 +1,6 @@
 <div class="ui input">
-    <input type="text" (input)="search($event)" placeholder="Search...">
-  </div>
+  <input type="text" [formControl]="searchData" placeholder="Search...">
+</div>
 <div class="path">
   <p>Path : <span>{{this.path}}</span></p>
 </div>

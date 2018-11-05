@@ -39,7 +39,7 @@ export class CommunicationService {
           name: '',
           age: 0,
           password: '',
-          error: err.error.text
+          error: err
         }
         this.getInfoUser.next(error)
         return of();

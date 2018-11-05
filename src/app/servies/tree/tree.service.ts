@@ -17,7 +17,7 @@ export class TreeService {
   constructor() { }
 
   getItems(path: string, keys: number[]): IItem[] {
-    const arr = new Array(500).fill(0);
+    const arr = new Array(2000).fill(0);
     const items = arr.map(this.getItem(path, keys));
     this.items.push(...items);
     return items;
@@ -52,18 +52,18 @@ export class TreeService {
       return
     }
     this.changeVisible$.next(true);
-
+    const ids = new Set();
     this.items.forEach(item => {
-      setTimeout(()=> {
         if (item.name.includes(value)) {
-          this.search$.next(item.id);
-          item.keys.forEach(id => this.search$.next(id));
+          ids.add(item.id);
+          item.keys.reduce((prev, elem) => {
+              ids.add(elem);
+              return prev;
+          }, 0);
         }
-      }, 0)
     });
-    setTimeout(()=> {
-      this.render$.next(true);
-    },0);
+    ids.forEach(id => this.search$.next(id));
+    this.render$.next(true);
   }
 }
 function makeName() {

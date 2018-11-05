@@ -1,9 +1,9 @@
-<div class="container" [class.hide]="hideMain"> 
+<div class="container" [hidden]="hideMain"> 
   {{hide}}
   <button class="btn-item-tree" (click)="clickItem()">
     {{ param.name }}
   </button>
-  <div [class.hide]="hide" >
+  <div [hidden]="hide" >
     <ng-template appItemHost ></ng-template>
   </div>
 </div>
