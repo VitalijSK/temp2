@@ -10,6 +10,9 @@
         <a routerLink="/settings" class="item" routerLinkActive="active" *ngIf="state.getValue()?.role !== 0"  >
             {{ 'SETTINGS' | translate }}
         </a>
+        <a routerLink="/tree" class="item" routerLinkActive="active" >
+            {{ 'TREE' | translate }}
+        </a>
         <div class="right menu">
             <a (click)="logout()" class="item" *ngIf="state.getValue()?.role !== 0" >
                 {{ 'LOGOUT' | translate }}

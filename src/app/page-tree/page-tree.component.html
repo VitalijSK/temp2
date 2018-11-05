@@ -1,0 +1,7 @@
+<div class="ui input">
+    <input type="text" (input)="search($event)" placeholder="Search...">
+  </div>
+<div class="path">
+  <p>Path : <span>{{this.path}}</span></p>
+</div>
+<app-item [param]="itemParam"></app-item>

@@ -19,6 +19,10 @@ import { PageNotfoundComponent } from './page-notfound/page-notfound.component';
 import { PageSingupComponent } from './page-singup/page-singup.component';
 
 import { AuthGuard } from './guards/auth/auth.guard';
+import { PageTreeComponent } from './page-tree/page-tree.component';
+import { ItemComponent } from './item/item.component';
+import { ItemHostDirective } from './directives/item/item-host.directive';
+import { ItemsTreeComponent } from './items-tree/items-tree.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'https://localhost:3000/api/language/', '.json');
@@ -39,6 +43,7 @@ const appRoutes: Routes = [
       component: PageSettingsComponent,
       canActivate : [AuthGuard]
     },
+    { path: 'tree', component : PageTreeComponent },
     { path: 'forgot', component: PageForgotComponent },
     { path: 'notfound',  component: PageNotfoundComponent },
     {   path: '**',
@@ -57,7 +62,11 @@ const appRoutes: Routes = [
     PageSettingsComponent,
     PageForgotComponent,
     PageNotfoundComponent,
-    PageSingupComponent
+    PageSingupComponent,
+    PageTreeComponent,
+    ItemComponent,
+    ItemHostDirective,
+    ItemsTreeComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +80,9 @@ const appRoutes: Routes = [
         deps: [HttpClient]
       }
     })
+  ],
+  entryComponents: [
+    ItemsTreeComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
