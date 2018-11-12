@@ -4,17 +4,20 @@
         <a routerLink="/" class="item" routerLinkActive="active" >
             {{ 'HOME' | translate }}
         </a>
-        <a routerLink="/profile" class="item" routerLinkActive="active" *ngIf="state.getValue()?.role !== 0" >
+        <a routerLink="/profile" class="item" routerLinkActive="active" *ngIf="(role$ | async) !== 0" >
             {{ 'MYPROFILE' | translate }}
         </a>
-        <a routerLink="/settings" class="item" routerLinkActive="active" *ngIf="state.getValue()?.role !== 0"  >
+        <a routerLink="/settings" class="item" routerLinkActive="active" *ngIf="(role$ | async) !== 0"  >
             {{ 'SETTINGS' | translate }}
         </a>
         <a routerLink="/tree" class="item" routerLinkActive="active" >
             {{ 'TREE' | translate }}
         </a>
+        <a routerLink="/users" class="item" routerLinkActive="active" *ngIf="(role$ | async) === 2"  >
+            {{ 'USERS' | translate }}
+        </a>
         <div class="right menu">
-            <a (click)="logout()" class="item" *ngIf="state.getValue()?.role !== 0" >
+            <a (click)="logout()" class="item" *ngIf="(role$ | async) !== 0" >
                 {{ 'LOGOUT' | translate }}
             </a>
             <select class="ui dropdown menu" (change)="selectLanguage($event)"> 

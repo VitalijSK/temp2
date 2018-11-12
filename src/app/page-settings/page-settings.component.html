@@ -1,15 +1,6 @@
 <section class="container">
-    <div *ngIf="data">
+    <div *ngIf="user">
         <h2 class="title">{{ 'SETTINGS' | translate }}</h2>
-        <app-form-add (submitUser)="onSubmit($event)" [user]="data"></app-form-add>
-    </div>
-
-    <div *ngIf="success" class="ui success message">
-        <div class="header" translate>
-            Your information was updated.
-        </div>
-    </div>
-    <div *ngIf="error" class="ui negative message">
-        <div class="header" translate>{{ error }}</div>
+        <app-form-add *ngIf="user !== null" (submitUser)="onSubmit($event)" [user]="user"></app-form-add>
     </div>
 </section>

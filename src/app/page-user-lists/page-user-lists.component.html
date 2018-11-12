@@ -1,0 +1,7 @@
+<section class="container">
+  <h2 class="title">{{ 'USERS' | translate }}</h2>
+  <app-user-lists [users]="users$ | async" (deleteUser)="deleteUserById($event)" (selectUser)="selectUserById($event)"></app-user-lists>
+  <p class="center"><i class="plus icon" (click)="addForm()" ></i></p>
+  <app-form-add *ngIf="add" (submitUser)="addUser($event)" [user]="userEmpty"></app-form-add>
+  <app-form-add *ngIf="user && !add" (submitUser)="submitUser($event)" [user]="user"></app-form-add>
+</section>

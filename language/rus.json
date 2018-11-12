@@ -1,5 +1,6 @@
 {
     "HOME": "Главная",
+    "USERS" : "Пользователи",
     "MYPROFILE" : "Мой профиль",
     "SETTINGS" : "Настройки",
     "LOGOUT" : "Выход",
@@ -33,6 +34,7 @@
     "Your user registration was successful." : "Пользователь был зарегестрирован.",
     "Something gone wrong" : "Что-то пошло не так",
     "Oops..." : "Опачки...",
+    "User was added!" : "Пользователь был добавлен!",
     "FORGOTPASSWORD" : "Забыл пароль",
     "SINGUP" : "Зарегистрироваться",
     "SUBMIT" : "Отправить",

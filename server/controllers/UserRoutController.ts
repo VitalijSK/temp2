@@ -48,10 +48,8 @@ class UsersControllers {
     };
     checkName(req: Request & IUserRequest, res: Response) {
         setTimeout( () => {
-            
             const name : string = req.checkName;
             const checkUserName = users.checkUserName(name);
-            console.log(checkUserName)
             return res.end(JSON.stringify(checkUserName));
         }, 300);
     }
@@ -94,7 +92,7 @@ class UsersControllers {
     deleteUserById(req: Request, res: Response) {
         const user = users.deleteUserById(req.params.id);
         if (user) {
-            return res.end(JSON.stringify('User was deleted'));
+            return res.end(JSON.stringify(true));
         }
         return res.end('This user is not found');
     };

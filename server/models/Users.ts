@@ -51,6 +51,7 @@ class UsersModel {
     addUser(user: IUser) {
         if (user) {
             user.id = this.getId();
+            user.role = 1;
             this.users.push(user);
             return true;
         }

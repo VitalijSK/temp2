@@ -6,12 +6,28 @@
     "startClient": "ng serve --ssl",
     "startServer": "tsc && node ./build/server/app",
     "build": "ng build",
-    "test": "ng test",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --runInBand",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "jest": {
+    "preset": "jest-preset-angular",
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json",
+      "html"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/e2e/"
+    ],
+    "setupTestFrameworkScriptFile": "<rootDir>/src/setupJest.ts"
+  },
   "private": true,
   "dependencies": {
+    "@angular-redux/store": "9.0.0",
     "@angular/animations": "7.0.1",
     "@angular/common": "7.0.1",
     "@angular/compiler": "7.0.1",
@@ -21,6 +37,8 @@
     "@angular/platform-browser": "7.0.1",
     "@angular/platform-browser-dynamic": "7.0.1",
     "@angular/router": "7.0.1",
+    "@ngrx/effects": "6.1.2",
+    "@ngrx/store": "6.1.2",
     "@ngx-translate/core": "11.0.0",
     "@ngx-translate/http-loader": "4.0.0",
     "@types/uuid": "3.4.4",
@@ -32,6 +50,7 @@
     "moment": "2.22.2",
     "ng-semantic": "1.1.13",
     "npm": "6.4.1",
+    "redux": "4.0.1",
     "router": "1.3.3",
     "rxjs": "6.3.3",
     "semantic-ui-css": "2.4.1",
@@ -48,11 +67,14 @@
     "@types/express": "4.16.0",
     "@types/jasmine": "2.8.9",
     "@types/jasminewd2": "2.0.5",
+    "@types/jest": "^23.3.9",
     "@types/node": "10.12.1",
     "codelyzer": "4.5.0",
     "http2": "3.3.7",
     "jasmine-core": "3.3.0",
     "jasmine-spec-reporter": "4.2.1",
+    "jest": "^23.6.0",
+    "jest-preset-angular": "^6.0.1",
     "karma": "3.1.1",
     "karma-chrome-launcher": "2.2.0",
     "karma-coverage-istanbul-reporter": "2.0.4",

@@ -20,5 +20,5 @@ export function forbiddenAgeValidator(min: number, max : number): ValidatorFn {
     };
   }
 
-const checkInterval = (min : number, max : number, value : number) => min <= value && max >= value;
-const checkInt = (value : number) => !(Math.floor(value) - value);
+export const checkInterval = (min : number, max : number, value : number) => min <= value && max >= value;
+export const checkInt = (value : number) => !(Math.floor(value) - value);

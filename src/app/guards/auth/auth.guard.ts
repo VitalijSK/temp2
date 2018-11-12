@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { StateService } from 'src/app/servies/state/state.service';
-import {Observable} from 'rxjs';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private stateService : StateService) {}
+  constructor(private router : Router) {}
    canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable <boolean> {
-    return this.stateService.getValueGuardUser();
+    state: RouterStateSnapshot): boolean {
+
+    const token = localStorage.getItem('token');
+
+    if(token === undefined || token === 'undefined' || token === null) {
+      this.router.navigate(['/singin']);
+      return false;
+    }
+    return true;
   }
 }

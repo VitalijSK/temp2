@@ -11,6 +11,10 @@ export class UserService {
   getUsers(): Observable<Array<IUser>> {
     return this.http.get<Array<IUser>>('https://localhost:3000/api/users');
   }
+  addUser(user : IUser) {
+    const data = user;
+    return this.http.post(`https://localhost:3000/api/users/`, data);
+  }
   getPassword(name: string): Observable<string> {
     const data = { checkName: name };
     return this.http.post<string>('https://localhost:3000/api/users/getPassword', data);
@@ -18,6 +22,9 @@ export class UserService {
   getCurrectName(name: string): Observable<Boolean> {
     const data = { checkName: name };
     return this.http.post<Boolean>('https://localhost:3000/api/users/checkName', data);
+  }
+  deleteUserById(id : string) : Observable<boolean> {
+    return this.http.delete<boolean>(`https://localhost:3000/api/users/${id}`);
   }
   Auth(name: string, password: string): Observable<{ token: string }> {
     const data = { name, password };

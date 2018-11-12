@@ -8,4 +8,5 @@ export default interface IUser {
     dateOfFirstLogin ?: string;
     dateOfBirth ?: string;
     error ?: string;
+    role ? : number;
   }

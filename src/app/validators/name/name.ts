@@ -41,10 +41,10 @@ const checkMiddleWare = (name: string, callback : Function) => {
 }
 
 //callback functions
-const checkRusLetter = (arrName : string[]) => arrName.some(isRusLetter);
-const checkCountName = (arrName : string[]) => !arrName.every(isTwoWord());
-const checkUpperFirstLetter = (arrName : string[]) => !arrName.every(isCheckLetter());
-const checkSymbolName = (arrName : string[]) => !arrName.every(isLetter);
+export const checkRusLetter = (arrName : string[]) => arrName.some(isRusLetter);
+export const checkCountName = (arrName : string[]) => !arrName.every(isTwoWord());
+export const checkUpperFirstLetter = (arrName : string[]) => !arrName.every(isCheckLetter());
+export const checkSymbolName = (arrName : string[]) => !arrName.every(isLetter);
 
 //secondary functions
 const  isCheckLetter = () => {

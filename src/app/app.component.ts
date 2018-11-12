@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { StateService } from './servies/state/state.service';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IUserState } from './interfaces/state';
+import { Store } from '@ngrx/store';
+import { LoadUser, getRole, Logout } from './store';
 
 @Component({
   selector: 'app-root',
@@ -12,24 +13,23 @@ import { IUserState } from './interfaces/state';
 })
 export class AppComponent implements OnInit {
   
-  state : BehaviorSubject< IUserState >;
+  role$ : Observable< number >;
+  loading$ : Observable< boolean >;
 
   constructor(private translate: TranslateService, 
-              private stateServies : StateService,
-              private router: Router) {}
+              private router: Router,
+              private store : Store <IUserState>) {}
   ngOnInit () {
     this.translate.setDefaultLang('en');
     this.translate.use('en');
-    this.stateServies.getStateChange();
-    this.state = this.stateServies.getCurrectValue();
+    this.store.dispatch(new LoadUser());
+    this.role$ = this.store.select(getRole);
   }
   selectLanguage($event) {
     const language = $event.target.value;
     this.translate.use(language);
   }
   logout() {
-    localStorage.setItem('token', undefined);
-    this.stateServies.getStateChange();
-    this.router.navigate(['/singin']);
+    this.store.dispatch(new Logout());
   }
 }

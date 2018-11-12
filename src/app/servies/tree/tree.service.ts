@@ -17,7 +17,7 @@ export class TreeService {
   constructor() { }
 
   getItems(path: string, keys: number[]): IItem[] {
-    const arr = new Array(2000).fill(0);
+    const arr = new Array(100).fill(0);
     const items = arr.map(this.getItem(path, keys));
     this.items.push(...items);
     return items;

@@ -1,5 +1,6 @@
 {
     "HOME": "Home",
+    "USERS" : "Users",
     "MYPROFILE" : "My profile",
     "SETTINGS" : "Settings",
     "LOGOUT" : "Logout",
@@ -32,6 +33,7 @@
     "Your information was updated!" : "Your information was updated!",
     "Your user registration was successful." : "Your user registration was successful.",
     "Something gone wrong" : "Something gone wrong",
+    "User was added!" : "User was added!",
     "Oops..." : "Oops...",
     "FORGOTPASSWORD" : "Forgot password",
     "SINGUP" : "Sign Up",

@@ -1,0 +1,3 @@
+<div class="list">
+  <app-user-element *ngFor="let user of users; trackBy: trackByFn" [name]="user.name" [id]="user.id" (deleteId)="deleteUserById($event)" (selectId)="selectUserById($event)"></app-user-element>
+</div>

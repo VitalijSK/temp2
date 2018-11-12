@@ -1,7 +1,8 @@
 [
     {   
         "id": "0",
-        "name":"Katrin22",
+        "name":"Katrin",
+        "role" : 1,
         "password" : "password",
         "dateOfBirth" : "2018-09-22T10:48:12.096Z",
         "dateOfFirstLogin" : "2018-09-22T10:48:12.096Z",
@@ -11,6 +12,7 @@
     {   
         "id":"1",
         "name":"Mark",
+        "role" : 2,
         "password" : "qwerty",
         "dateOfBirth" : "2018-09-22T10:48:12.096Z",
         "dateOfFirstLogin" : "2018-09-22T10:48:12.096Z",
@@ -20,6 +22,7 @@
     {   
         "id":"2",
         "name":"Jon",
+        "role" : 1,
         "password" : "123456",
         "dateOfBirth" : "2018-09-22T10:48:12.096Z",
         "dateOfFirstLogin" : "2018-09-22T10:48:12.096Z",

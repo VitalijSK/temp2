@@ -1,7 +1,7 @@
 <div class="ui placeholder segment">
     <div class="ui two column very relaxed stackable grid">
       <div class="column">
-        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" novalidate [ngClass]="'ui form'" [class.loading]="loading">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" novalidate [ngClass]="'ui form'" [class.loading]="loading$ | async">
           <div class="field">
             <label> {{ 'NAME' | translate }}</label>
                 <div [ngClass]="'ui icon left input'" [class.loading]="profileForm.controls['name'].pending">
@@ -36,9 +36,9 @@
               <a class="forgot" routerLink="/forgot">{{ 'FORGOTPASSWORD' | translate }}?</a>
             </div>
           <button type="submit" [disabled]="!profileForm.valid"  class="ui inverted violet button" >{{ 'LOGIN' | translate }}</button>
-          <div *ngIf="incorrect" class="ui negative message">
+          <div *ngIf="error$ | async" class="ui negative message">
             <div class="header" translate >
-                {{ incorrect }}.
+                Name or password incorrect.
             </div>
         </div>
         </form>

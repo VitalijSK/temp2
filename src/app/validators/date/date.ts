@@ -18,4 +18,4 @@ export function forbiddenDateValidator(formatDate : string): ValidatorFn {
     };
   }
 
-const checkDate = (date : string, formatDate : string) => moment(date, formatDate,true).isValid();
+export const checkDate = (date : string, formatDate : string) => moment(date, formatDate,true).isValid();

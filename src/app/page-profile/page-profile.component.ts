@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import IUser from '../interfaces/user';
-import { tap } from 'rxjs/operators';
-import { CommunicationService } from '../servies/communication/communication.service';
+import { getUser } from '../store/reducers';
+import { Store } from '@ngrx/store';
+import { IUserState } from '../store/reducers/user';
+import { Observable } from 'rxjs';
+import { LoadUser } from '../store';
 
 @Component({
   selector: 'app-page-profile',
@@ -9,20 +12,18 @@ import { CommunicationService } from '../servies/communication/communication.ser
   styleUrls: ['./page-profile.component.scss']
 })
 export class PageProfileComponent implements OnInit {
-  user: IUser;
+
+  user$: Observable<IUser>;
   error: string;
 
-  constructor(private communicationService: CommunicationService) { }
+  constructor(private store: Store<IUserState>) { }
 
   ngOnInit() {
-    this.communicationService.user$.pipe(
-      tap(data => {
-        if (data.error) {
-          this.error = data.error;
-        } else {
-          this.user = data;
-        }
-      })
-    ).subscribe();
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'update') {
+        this.store.dispatch(new LoadUser());
+      }
+    });
+    this.user$ = this.store.select(getUser);
   }
 }
