@@ -1,0 +1,18 @@
+<div class="ui comments">
+    <h3 class="ui dividing header">{{ 'Comments' | translate }}</h3>
+  <app-form-comment *ngIf="id" (submitComment)="sendComment($event)"></app-form-comment>
+  <div class="comment" *ngFor="let comment of comments$ | async">
+    <div class="content">
+      <div class="close" *ngIf="(role$ | async) === 2" (click)="deleteId(comment.id)">
+          <i class="window close icon"></i>
+      </div>
+      <a class="author">{{comment.username}}</a>
+      <div class="metadata">
+        <div class="date">{{comment.date | date:'MM/dd/yy'}}</div>
+      </div>
+      <div class="text">
+        <p>{{comment.body}}</p>
+      </div>
+    </div>
+  </div>
+</div>

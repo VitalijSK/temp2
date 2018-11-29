@@ -1,0 +1,34 @@
+<form *ngIf="articleForm" [formGroup]="articleForm" (ngSubmit)="onSubmit($event)" novalidate class="ui reply form">
+  <div class="field">
+      <label> {{ 'Title' | translate }}</label>
+    <input formControlName="title">
+    <div *ngIf="checkInvalid('title')" class="ui negative message">
+      <div *ngIf="articleForm.controls['title'].errors.required" class="header">
+        {{ 'REQUIRED' | translate: { value : 'Article' | translate} }}
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label> {{ 'Body' | translate }}</label>
+    <textarea formControlName="body"></textarea>
+    <div *ngIf="checkInvalid('body')" class="ui negative message">
+      <div *ngIf="articleForm.controls['body'].errors.required" class="header">
+        {{ 'REQUIRED' | translate: { value : 'Article' | translate} }}
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label> {{ 'Category' | translate }}</label>
+    <select formControlName="category">
+      <option *ngFor="let category of categories$ | async" value={{category.id}}>{{category.title}}</option>
+    </select>
+    <div *ngIf="checkInvalid('body')" class="ui negative message">
+      <div *ngIf="articleForm.controls['body'].errors.required" class="header">
+        {{ 'REQUIRED' | translate: { value : 'Article' | translate} }}
+      </div>
+    </div>
+  </div>
+  <button class="ui primary submit labeled icon button" [disabled]="!articleForm.valid">
+    <i class="icon edit"></i> {{ 'Article offer' | translate }}
+  </button>
+</form>

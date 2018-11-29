@@ -1,0 +1,48 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<header>
+    <nav class="ui secondary pointing menu">
+        <a routerLink="/" class="item" routerLinkActive="active" >
+            {{ 'HOME' | translate }}
+        </a>
+        <a routerLink="/articles" class="item" routerLinkActive="active" >
+            {{ 'Articles' | translate }}
+        </a>
+        <a routerLink="/article/offer" class="item" routerLinkActive="active" *ngIf="(role$ | async) !== 0"  >
+            {{ 'Article offer' | translate }}
+        </a>
+        <a routerLink="/articles/offer" class="item" routerLinkActive="active" *ngIf="(role$ | async) === 2"  >
+            {{ 'Articles offer' | translate }}
+        </a>
+        <a routerLink="/articles/reject" class="item" routerLinkActive="active" *ngIf="(role$ | async) === 2"  >
+            {{ 'Articles reject' | translate }}
+        </a>
+        <a routerLink="/users" class="item" routerLinkActive="active" *ngIf="(role$ | async) === 2"  >
+            {{ 'USERS' | translate }}
+        </a>
+        <a routerLink="/profile" class="item" routerLinkActive="active" *ngIf="(role$ | async) !== 0" >
+            {{ 'MYPROFILE' | translate }}
+        </a>
+        <a routerLink="/settings" class="item" routerLinkActive="active" *ngIf="(role$ | async) !== 0"  >
+            {{ 'SETTINGS' | translate }}
+        </a>
+        <a routerLink="/users" class="item" routerLinkActive="active" *ngIf="(role$ | async) === 2"  >
+            {{ 'USERS' | translate }}
+        </a>
+        <div class="right menu">
+            <a (click)="logout()" class="item" *ngIf="(role$ | async) !== 0" >
+                {{ 'LOGOUT' | translate }}
+            </a>
+            <select class="ui dropdown menu" (change)="selectLanguage($event)"> 
+                <option  value="">{{ 'LANGUAGE' | translate }}</option>
+                <option  value="en">{{ 'ENGLISH' | translate }}</option>
+                <option  value="rus">{{ 'RUSSUAN' | translate }}</option>
+            </select>
+        </div>
+    </nav>
+</header>
+<main>
+    <section>
+        <router-outlet></router-outlet>
+    </section>
+</main>
+

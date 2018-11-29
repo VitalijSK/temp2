@@ -1,0 +1,18 @@
+<div class="ui cards">
+  <div class="card" *ngFor="let article of articles">
+    <div class="content">
+      <div class="close" *ngIf="admin" (click)="deleteId(article.id)">
+        <i class="window close icon"></i>
+      </div>
+      <div class="ok" *ngIf="admin" (click)="applyId(article.id)">
+        <i class="chevron circle down icon"></i>
+      </div>
+      <div class="header">{{ article.title }}</div>
+      <div class="meta">{{ article.user_name }}</div>
+      <div class="description">
+        {{ article.shortBody }}
+      </div>
+      <button routerLink="/article/{{article.id}}" class="ui black basic button">Read more</button>
+    </div>
+  </div>
+</div>

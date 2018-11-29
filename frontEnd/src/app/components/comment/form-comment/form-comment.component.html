@@ -1,0 +1,13 @@
+<form *ngIf="commentForm" [formGroup]="commentForm" (ngSubmit)="onSubmit($event)" novalidate class="ui reply form">
+  <div class="field">
+    <textarea formControlName="text"></textarea>
+    <div *ngIf="checkInvalid('text')" class="ui negative message">
+      <div *ngIf="commentForm.controls['text'].errors.required" class="header">
+        {{ 'REQUIRED' | translate: { value : 'COMMENT' | translate} }}
+      </div>
+    </div>
+  </div>
+  <button class="ui primary submit labeled icon button" [disabled]="!commentForm.valid">
+    <i class="icon edit"></i> {{ 'Add Comment' | translate }}
+  </button>
+</form>

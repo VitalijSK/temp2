@@ -1,0 +1,4 @@
+<section class="container" *ngIf="article$ | async">
+  <app-article [article]="article$ | async"></app-article>
+  <app-comment [articleId]="(article$ | async).id"></app-comment>
+</section>

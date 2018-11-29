@@ -1,0 +1,17 @@
+.container {
+  width:100vw;
+  max-width:800px;
+  margin: 0 auto;
+
+  .name {
+    cursor:pointer;
+    color: #548eaa;
+    font-weight: 500;
+  }
+
+  .title {
+    color: #5f5f5f;
+    font-weight: 500;
+    font-size: 13px;
+  }
+}

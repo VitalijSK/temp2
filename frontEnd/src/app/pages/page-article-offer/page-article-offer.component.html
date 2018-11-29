@@ -1,0 +1,4 @@
+<section class="container">
+  <h2>{{ 'Articles offer' | translate }} </h2>
+  <app-list-article [articles]="articles$ | async" [admin]="role$ | async"></app-list-article>
+</section>
