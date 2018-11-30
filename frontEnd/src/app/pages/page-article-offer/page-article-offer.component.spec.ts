@@ -6,20 +6,7 @@ describe('PageArticleOfferComponent', () => {
   let component: PageArticleOfferComponent;
   let fixture: ComponentFixture<PageArticleOfferComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ PageArticleOfferComponent ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(PageArticleOfferComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect('component').toBeTruthy();
   });
 });

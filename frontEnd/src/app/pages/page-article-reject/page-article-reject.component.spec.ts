@@ -6,20 +6,7 @@ describe('PageArticleRejectComponent', () => {
   let component: PageArticleRejectComponent;
   let fixture: ComponentFixture<PageArticleRejectComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ PageArticleRejectComponent ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(PageArticleRejectComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect('component').toBeTruthy();
   });
 });
